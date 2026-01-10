@@ -82,3 +82,25 @@ th {
     background-color: #f8f9fa;
     font-weight: bold;
 }
+
+/* --- Novo Estilo do Totalizador --- */
+.card-total {
+    background-color: var(--primary);
+    color: white;
+    padding: 15px 25px;
+    border-radius: 8px;
+    text-align: right;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.card-total span {
+    display: block;
+    font-size: 0.9em;
+    opacity: 0.9;
+}
+
+.card-total strong {
+    display: block;
+    font-size: 1.5em; /* Deixa o número bem grande */
+    margin-top: 5px;
+}

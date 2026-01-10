@@ -1,8 +1,7 @@
 // 1. Ouvir o clique do botão "Salvar" (CADASTRO)
 document.getElementById('form-despesa').addEventListener('submit', async function(event) {
-    event.preventDefault(); // Impede a página de recarregar
+    event.preventDefault(); 
 
-    // Pega os valores
     const descricao = document.getElementById('descricao').value;
     const valor = document.getElementById('valor').value;
     const categoria = document.getElementById('categoria').value;
@@ -13,7 +12,6 @@ document.getElementById('form-despesa').addEventListener('submit', async functio
         categoria: categoria
     };
 
-    // Envia para o Python
     const resposta = await fetch('/api/adicionar', {
         method: 'POST',
         headers: {
@@ -24,36 +22,38 @@ document.getElementById('form-despesa').addEventListener('submit', async functio
 
     if (resposta.ok) {
         alert("Despesa salva com sucesso!");
-        carregarTabela(); // Atualiza a lista na hora
-        document.getElementById('form-despesa').reset(); // Limpa o formulário
+        carregarTabela(); 
+        document.getElementById('form-despesa').reset(); 
     } else {
         alert("Erro ao salvar despesa.");
     }
 });
 
 // 2. Função para mudar o status (ATUALIZAÇÃO)
-// Essa função é chamada quando você clica nos botões da tabela
 async function atualizarStatus(id, novoStatus) {
     await fetch(`/api/atualizar/${id}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status: novoStatus })
     });
-
-    // Recarrega a tabela para mostrar o novo status
     carregarTabela();
 }
 
-// 3. Função para buscar os dados e desenhar a tabela (LEITURA)
+// 3. Função para buscar os dados, desenhar a tabela E CALCULAR O TOTAL
 async function carregarTabela() {
     const resposta = await fetch('/api/listar');
     const listaDespesas = await resposta.json();
     
     const corpoTabela = document.getElementById('tabela-corpo');
-    corpoTabela.innerHTML = ''; // Limpa a tabela antes de preencher
+    corpoTabela.innerHTML = ''; 
+
+    // --- NOVA LÓGICA DE SOMA AQUI ---
+    let totalAcumulado = 0; // Começa com zero
 
     listaDespesas.forEach(despesa => {
-        // Define a cor baseada no status (Visual extra)
+        // Soma o valor da despesa atual ao total
+        totalAcumulado += despesa.valor;
+
         let corStatus = 'black';
         if (despesa.status === 'Aprovado') corStatus = 'green';
         if (despesa.status === 'Rejeitado') corStatus = 'red';
@@ -73,7 +73,12 @@ async function carregarTabela() {
         `;
         corpoTabela.innerHTML += linha;
     });
+
+    // --- ATUALIZA O HTML DO TOPO ---
+    // Formata para dinheiro brasileiro (R$ 1.000,00)
+    const valorFormatado = totalAcumulado.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    document.getElementById('total-valor').innerText = valorFormatado;
 }
 
-// Carregar a tabela assim que a página abrir
+// Inicializa
 carregarTabela();
