@@ -1,4 +1,3 @@
-// 1. Ouvir o clique do botão "Salvar" (CADASTRO)
 document.getElementById('form-despesa').addEventListener('submit', async function(event) {
     event.preventDefault(); 
 
@@ -29,7 +28,6 @@ document.getElementById('form-despesa').addEventListener('submit', async functio
     }
 });
 
-// 2. Função para mudar o status (ATUALIZAÇÃO)
 async function atualizarStatus(id, novoStatus) {
     await fetch(`/api/atualizar/${id}`, {
         method: 'POST',
@@ -39,7 +37,6 @@ async function atualizarStatus(id, novoStatus) {
     carregarTabela();
 }
 
-// 3. Função para buscar os dados, desenhar a tabela E CALCULAR O TOTAL
 async function carregarTabela() {
     const resposta = await fetch('/api/listar');
     const listaDespesas = await resposta.json();
@@ -47,11 +44,10 @@ async function carregarTabela() {
     const corpoTabela = document.getElementById('tabela-corpo');
     corpoTabela.innerHTML = ''; 
 
-    // --- NOVA LÓGICA DE SOMA AQUI ---
-    let totalAcumulado = 0; // Começa com zero
+    let totalAcumulado = 0; 
 
     listaDespesas.forEach(despesa => {
-        // Soma o valor da despesa atual ao total
+    
         totalAcumulado += despesa.valor;
 
         let corStatus = 'black';
@@ -74,11 +70,8 @@ async function carregarTabela() {
         corpoTabela.innerHTML += linha;
     });
 
-    // --- ATUALIZA O HTML DO TOPO ---
-    // Formata para dinheiro brasileiro (R$ 1.000,00)
     const valorFormatado = totalAcumulado.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
     document.getElementById('total-valor').innerText = valorFormatado;
 }
 
-// Inicializa
 carregarTabela();

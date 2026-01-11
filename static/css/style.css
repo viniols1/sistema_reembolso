@@ -1,19 +1,17 @@
-/* --- TEMA DARK ELEGANTE --- */
+
 :root {
-    /* Paleta Escura */
-    --bg-page: #121212;       /* Fundo quase preto */
-    --bg-card: #1e1e1e;       /* Cinza escuro para os cartões */
-    --text-main: #e0e0e0;     /* Texto claro (não branco puro para não cansar) */
-    --text-muted: #a0a0a0;    /* Texto secundário */
+    --bg-page: #121212;       
+    --bg-card: #1e1e1e;       
+    --text-main: #e0e0e0;     
+    --text-muted: #a0a0a0;    
     
-    /* Cores de Ação (Mantendo a identidade, mas ajustadas para o dark) */
-    --primary: #3b82f6;       /* Azul um pouco mais brilhante */
-    --border: #333333;        /* Bordas sutis */
-    --input-bg: #2d2d2d;      /* Fundo dos campos de digitação */
+    --primary: #3b82f6;      
+    --border: #333333;       
+    --input-bg: #2d2d2d;     
 }
 
 body {
-    /* Fonte secundária para leitura (Lato) */
+    
     font-family: 'Lato', sans-serif;
     background-color: var(--bg-page);
     color: var(--text-main);
@@ -21,10 +19,9 @@ body {
     padding: 20px;
 }
 
-/* --- TIPOGRAFIA ELEGANTE (A mudança que você pediu) --- */
 h1, h2, .card-total span {
-    font-family: 'Playfair Display', serif; /* Fonte elegante */
-    font-style: italic; /* Puxado para o itálico */
+    font-family: 'Playfair Display', serif; 
+    font-style: italic; 
     font-weight: 600;
     letter-spacing: 0.5px;
 }
@@ -39,19 +36,17 @@ header p {
     font-style: italic;
 }
 
-/* --- CARTÕES (Cards) --- */
 .card {
     background: var(--bg-card);
     padding: 25px;
-    border-radius: 12px; /* Cantos mais arredondados */
-    box-shadow: 0 4px 20px rgba(0,0,0,0.4); /* Sombra mais forte */
+    border-radius: 12px; 
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
     margin-bottom: 25px;
     border: 1px solid var(--border);
 }
 
-/* --- ESTILO DO TOTALIZADOR (Destaque) --- */
 .card-total {
-    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); /* Degradê Azul */
+    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); 
     color: white;
     padding: 15px 30px;
     border-radius: 12px;
@@ -63,10 +58,9 @@ header p {
     font-size: 1.8em;
     margin-top: 5px;
     display: block;
-    font-family: 'Lato', sans-serif; /* Números ficam melhor em fontes retas */
+    font-family: 'Lato', sans-serif;
 }
 
-/* --- FORMULÁRIOS --- */
 label {
     display: block;
     margin-bottom: 8px;
@@ -82,7 +76,6 @@ label {
 }
 .form-row .form-group { flex: 1; }
 
-/* Campos de Input no Dark Mode */
 input, select {
     width: 100%;
     padding: 12px;
@@ -100,7 +93,6 @@ input:focus, select:focus {
     border-color: var(--primary);
 }
 
-/* Botão Salvar */
 .btn-submit {
     background-color: var(--primary);
     color: white;
@@ -118,7 +110,6 @@ input:focus, select:focus {
 
 .btn-submit:hover { filter: brightness(1.1); }
 
-/* --- TABELA --- */
 table {
     width: 100%;
     border-collapse: separate;
@@ -144,7 +135,6 @@ td {
     color: var(--text-main);
 }
 
-/* Botões da Tabela */
 button {
     background: none;
     border: 1px solid transparent;
